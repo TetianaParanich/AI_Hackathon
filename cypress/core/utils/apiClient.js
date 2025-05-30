@@ -1,9 +1,20 @@
-export const apiRequest = (method, endpoint, payload = {}, headers = {}) => {
+const baseURL = Cypress.env('baseURL');
+
+export const apiRequest = ({
+  endpoint,
+  authToken,
+  failOnStatusCode = true
+}) => {
+  const defaultHeaders = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    ...(authToken && { Authorization: `Bearer ${authToken}` }),
+  };
+
   return cy.request({
-    method: method,
-    url: Cypress.env('apiBaseUrl') + endpoint,
-    body: payload,
-    headers: headers,
-    // failOnStatusCode: false, // Prevent Cypress from throwing errors on non-200 responses
+    method: 'GET',
+    url: `${baseURL}/${endpoint}`,
+    headers: defaultHeaders,
+    failOnStatusCode: failOnStatusCode,
   });
 };

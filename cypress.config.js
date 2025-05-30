@@ -1,18 +1,16 @@
 const { defineConfig } = require('cypress');
-require('dotenv').config(); // Load environment variables from .env
+require('dotenv').config();
 
 module.exports = defineConfig({
   e2e: {
-    // Access the .env variables for use in your tests
     env: {
-      baseURL: process.env.BASE_URL,        // ENV variable for base URL
-      qaAgentPath: process.env.QA_AGENT_PATH, // QA_AGENT_PATH
-      username: process.env.USERNAME,      // Username
-      password: process.env.PASSWORD,      // Password
+      baseURL: process.env.BASE_URL,
+      agentsPath: process.env.AGENTS_PATH,
+      username: process.env.USERNAME,
+      password: process.env.PASSWORD,
+      apiToken: process.env.API_TOKEN
     },
-    // Pattern for test files
     specPattern: 'cypress/tests/**/*.cy.js',
-    // Support file for custom commands and setup
     supportFile: 'cypress/support/e2e.js',
     defaultCommandTimeout: 10000,
     video: false,
