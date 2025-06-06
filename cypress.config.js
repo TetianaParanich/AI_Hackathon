@@ -9,6 +9,7 @@ module.exports = defineConfig({
       authURL: process.env.AUTH_URL,
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
+      project: process.env.PROJECT,
     },
     specPattern: 'cypress/tests/**/*.cy.js',
     supportFile: 'cypress/support/e2e.js',

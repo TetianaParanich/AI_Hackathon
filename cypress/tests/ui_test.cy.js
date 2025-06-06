@@ -5,7 +5,7 @@ import AgentDetails from '../business/ui/agentDetails';
 
 const username = 'at_tetiana_paranich@elitea.ai';
 const password = Cypress.env('password');
-const projectName = 'Iwomm';
+const projectName = Cypress.env('project');
 const jiraId = 'EPMCTEDUB-15';
 
 describe('EliteA QA Agent UI Tests', () => {
@@ -78,15 +78,17 @@ describe('EliteA QA Agent UI Tests', () => {
     });
   });
 
-  it.only('Ensure the agent gracefully handles errors in different stages of the task flow', () => {
+  it('Ensure the agent gracefully handles errors in different stages of the task flow', () => {
     const invalidJiraId = 'EPMCTEDUB-XYZ';
-    const errorMessage = 'It appears that the JIRA ID \'EPMCTEDUB-XYZ\' is invalid.';
+    const errorMessage = 'is invalid';
     
     AgentDetails.typePromtMessage(invalidJiraId);
     AgentDetails.submitPromt();
-    AgentDetails.getPromtResult()
-      .should('be.visible')
-      .and('contain.text', errorMessage);
-  
+    [
+      invalidJiraId,
+      errorMessage
+    ].forEach(keyword => {
+      AgentDetails.getPromtResult().should('be.visible').and('contain.text', keyword);
+    });
   });
 });

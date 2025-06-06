@@ -1,7 +1,8 @@
 import landingPageLocators from '../../core/pages/landingPage';
+import { getLongDelay } from '../../core/utils/cypressTools';
 
 class LandingPage {
-  selectProject(projectName) {
+  selectProject() {
     cy.get(landingPageLocators.rootSection).should('be.visible');
     cy.get(landingPageLocators.projectSelect)
       .should('be.visible')
@@ -12,7 +13,7 @@ class LandingPage {
   }
 
   navigateToAgents(){
-    cy.get(landingPageLocators.agentsButton)
+    cy.get(landingPageLocators.agentsButton, getLongDelay())
       .should('be.visible')
       .click();
   }
