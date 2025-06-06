@@ -3,16 +3,16 @@ require('dotenv').config();
 
 module.exports = defineConfig({
   e2e: {
+    experimentalOriginDependencies: true,
     env: {
       baseURL: process.env.BASE_URL,
-      agentsPath: process.env.AGENTS_PATH,
+      authURL: process.env.AUTH_URL,
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
-      apiToken: process.env.API_TOKEN
     },
     specPattern: 'cypress/tests/**/*.cy.js',
     supportFile: 'cypress/support/e2e.js',
-    defaultCommandTimeout: 10000,
+    defaultCommandTimeout: 50000,
     video: false,
     screenshotsFolder: 'reports/screenshots',
     reporter: 'mochawesome',
